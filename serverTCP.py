@@ -1,7 +1,14 @@
 from socket import *
 from logging import info, error
+import json
 
-PORT = 8181
+
+# Cargar configuracion
+conf = open('server_conf.json')
+conf = json.load(conf)
+
+HOST = conf['host']
+PORT = conf['port']
 BACKLOG = 4
 BUFFSIZE = 1024
 
@@ -14,7 +21,7 @@ def init_server():
         error(f'Failed to create socket with error: {err}')
 
     sockfd.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
-    sockfd.bind(('', PORT))
+    sockfd.bind((HOST, PORT))
     sockfd.listen(BACKLOG)
     info('Socket is now listening')
     

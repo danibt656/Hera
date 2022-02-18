@@ -1,11 +1,16 @@
 from socket import *
+import json
 
 
-SERVER_NAME = '127.0.0.1'
-PORT = 8181
+# Cargar configuracion
+conf = open('server_conf.json')
+conf = json.load(conf)
+
+HOST = conf['host']
+PORT = conf['port']
 
 clientSocket = socket(AF_INET, SOCK_STREAM)
-clientSocket.connect((SERVER_NAME, PORT))
+clientSocket.connect((HOST, PORT))
 
 request = input('>> ')
 clientSocket.send(request.encode())
