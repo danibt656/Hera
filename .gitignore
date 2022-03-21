@@ -1,2 +1,4 @@
+# Ignorar de cara a los commits
 env/
 .vscode/
+__pycache__/
