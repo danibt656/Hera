@@ -32,7 +32,7 @@ def init_server():
 
 
 def accept_connections(serverSocket):
-    connectionfd, address = serverSocket.accept()
+    connectionfd, _ = serverSocket.accept()
     
     request = connectionfd.recv(BUFFSIZE)
     request = request.decode()

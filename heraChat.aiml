@@ -1,0 +1,54 @@
+<aiml version="1.0.1" encoding="UTF-8">
+<!-- basic_chat.aiml -->
+
+    <category>
+        <pattern>HOLA</pattern>
+        <template>GREET</template>
+    </category>
+    <category>
+        <pattern>HOLA *</pattern>
+        <template>
+            <srai>HOLA</srai>
+        </template>
+    </category>
+    
+    <category>
+        <pattern>QUE TAL ESTAS</pattern>
+        <template>
+            HWRU
+        </template>
+    </category>
+    
+    <category>
+        <pattern>QUE HORA ES</pattern>
+        <template>
+            TIME
+        </template>
+    </category>
+
+    <category>
+        <pattern>QUE DIA ES</pattern>
+        <template>
+            DATE
+        </template>
+    </category>
+    <category>
+        <pattern>QUE DIA ES *</pattern>
+        <template>
+            DATE <set name="instant"><star/></set>
+        </template>
+    </category>
+    <category>
+        <pattern>QUE DIA FUE *</pattern>
+        <template>
+            DATE <set name="instant"><star/></set>
+        </template>
+    </category> 
+
+    <category>
+        <pattern>EL TIEMPO EN *</pattern>
+        <template>
+            WEATHER <set name="location"><star/></set>
+        </template>
+    </category>
+</aiml>
