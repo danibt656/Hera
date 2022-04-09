@@ -4,6 +4,7 @@ import json
 import signal
 import threading
 from hvap import *
+import os
 
 
 # Cargar configuracion
@@ -52,9 +53,21 @@ def process_request(connectionfd, request):
     connectionfd.close()
     logging.info(f'Cerrando servicio [{threading.current_thread()}]')
     
+def clear_tmp_files():
+    logging.info('Limpiando ficheros temporales...')
+    dir_name = "./temp/"
+    test = os.listdir(dir_name)
+
+    for item in test:
+        if item.endswith(".mp3"):
+            os.remove(os.path.join(dir_name, item))
+    logging.info('Ficheros temporales eliminados')
+
 
 def handler_SIGINT(signum, frame):
+    # Delete al .mp3 files (if there are any)
     print('\n')
+    clear_tmp_files()
     logging.info('Cerrando servidor\n')
     serverSocket.close()
     exit(1)

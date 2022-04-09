@@ -4,7 +4,8 @@ Utiliades para el protocolo HVAP
 from lib2to3.pgen2.token import COMMA
 import logging
 from datetime import datetime
-import requests, json
+import requests
+import random
 
 # Weather API base URL & Key
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather?"
@@ -22,13 +23,24 @@ def eval_greet(request_obj):
     """
     Saludar
     """
-    return HVAP_response('200', 'Hola!')
+    responses = [       
+        'Hola!',
+        'Que bien oirte de nuevo!',
+        'Hola, ¿como va todo?'
+    ]
+    return HVAP_response('200', random.choice(responses))
 
 def eval_how_are_you(request_obj):
     """
     Preguntar que tal
     """
-    return HVAP_response('200', 'Bien, gracias! :D')
+    responses = [       
+        'Bien, gracias!',
+        'Todos tenemos dias normales',
+        'Si tu me hablas, me alegras el dia!',
+        'Bien, ¿que tal tu?'
+    ]
+    return HVAP_response('200', random.choice(responses))
 
 def eval_time_of_day(request_obj):
     """
