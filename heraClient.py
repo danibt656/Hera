@@ -82,7 +82,16 @@ def main():
     print('\t=> Received: ', response[1])
     voice_obj = gTTS(text=response[1], lang='es', slow=False)
     voice_obj.save("temp/response.mp3")
-    #playsound("response.mp3")
+    playsound("temp/response.mp3")
+
+    print('Limpiando ficheros temporales...')
+    dir_name = "./temp/"
+    test = os.listdir(dir_name)
+
+    for item in test:
+        if item.endswith(".mp3"):
+            os.remove(os.path.join(dir_name, item))
+    print('Ficheros temporales eliminados')
 
     clientSocket.close()
 

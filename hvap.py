@@ -85,6 +85,8 @@ def eval_date(request_obj):
     if when == 'AYER':
         response_text = 'Ayer fue '
         day -= 1
+        if day == 0:
+            day = 7
         day_num -= 1
 
 
@@ -96,7 +98,7 @@ def eval_date(request_obj):
                   5: 'Mayo', 6: 'Junio', 7: 'Julio', 8: 'Agosto',
                   9: 'Septiembre', 10: 'Octubre', 11: 'Noviembre',
                   12: 'Diciembre'}
-
+                  
     if day in Day_dict.keys():
         day_of_the_week = Day_dict[day]
         response_text += day_of_the_week + ', ' + str(day_num) + ' de '
