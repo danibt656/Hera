@@ -7,6 +7,7 @@ import os
 import sys
 from gtts import gTTS
 from playsound import playsound
+import heraChat
 
 clientSocket = None
 RECV_SIZE = 1024
@@ -35,7 +36,7 @@ def main():
     conf = open('server_conf.json')
     conf = json.load(conf)
     signal.signal(signal.SIGINT, handler_SIGINT)
-    kernel = aiml.Kernel()
+    #kernel = aiml.Kernel()
 
     # Cargar conexion TCP
     HOST = conf['host']
@@ -44,29 +45,37 @@ def main():
     clientSocket.connect((HOST, PORT))
 
     # Cargar Kernel de AIML
-    if os.path.isfile(BRAIN_FILE):
-        kernel.bootstrap(brainFile = BRAIN_FILE)
-    else:
-        kernel.bootstrap(learnFiles = AIML_XML, commands = AIML_LOAD)
-        kernel.saveBrain(BRAIN_FILE)
-    kernel.learn(AIML_XML)
-    kernel.respond(AIML_LOAD)
+    # if os.path.isfile(BRAIN_FILE):
+    #     kernel.bootstrap(brainFile = BRAIN_FILE)
+    # else:
+    #     kernel.bootstrap(learnFiles = AIML_XML, commands = AIML_LOAD)
+    #     kernel.saveBrain(BRAIN_FILE)
+    # kernel.learn(AIML_XML)
+    # kernel.respond(AIML_LOAD)
 
     #message = input('>> ')
     message = sys.argv[1]
 
     # Obtener respuesta del kernel
-    command = kernel.respond(message)
+    # command = kernel.respond(message)
+    command, headers_prev = heraChat.get_request_command(message)
     command = command.split(' ')[0]
 
     # Computar cabeceras para request
     headers = []
-    instant = kernel.getPredicate('instant')
-    if instant != '':
-        headers.append(instant)
-    location = kernel.getPredicate('location')
-    if location != '':
-        headers.append(location)
+    # instant = kernel.getPredicate('instant')
+    # if instant != '':
+    #     headers.append(instant)
+    # location = kernel.getPredicate('location')
+    # if location != '':
+    #     headers.append(location)
+    if headers_prev is not None:
+        if 'instant' in headers_prev:
+            instant = headers_prev['instant']
+            if instant != '':
+                headers.append(instant)
+        elif 'location' in headers_prev:
+            headers.append(headers_prev['location'])
 
     # Generar y enviar request
     request = generate_request(command, headers)

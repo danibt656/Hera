@@ -36,8 +36,9 @@ def eval_how_are_you(request_obj):
     """
     responses = [       
         'Bien, gracias!',
+        'Estoy muy bien, gracias por preguntar',
         'Todos tenemos dias normales',
-        'Si tu me hablas, me alegras el dia!',
+        'Yo estoy bien si tu estas bien!',
         'Bien, ¿que tal tu?'
     ]
     return HVAP_response('200', random.choice(responses))
@@ -153,7 +154,7 @@ def weather_recommendation(temp_feel_like):
         return 'Recuerda abrigarte!'
     elif temp_feel_like <= 15:
         return 'Hace fresquito!'
-    elif temp_feel_like <= 27:
+    elif temp_feel_like <= 32:
         return 'Hace un dia estupendo!'
     else:
         return 'Cuidado con el bochorno!'
