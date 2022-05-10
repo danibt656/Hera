@@ -159,6 +159,14 @@ def weather_recommendation(temp_feel_like):
     else:
         return 'Cuidado con el bochorno!'
 
+def pres42(request_obj):
+    txt = 'La respuesta a la vida, el universo y todo lo demás, es 42. Probablemente el problema principal es que "la vida, el universo y todo lo demás" no es una pregunta, por tanto carece de respuesta.'
+    return HVAP_response('200', txt)
+
+def pres_ini(request_obj):
+    txt = '¿Crees que soy tu sirvienta? No voy a cubrirte el culo porque no hayas preparado un guión, así que arréglatelas solo'
+    return HVAP_response('200', txt)
+
 """
 ##############################################################
 """
@@ -178,6 +186,8 @@ commands = {
     'TIME': eval_time_of_day,
     'DATE': eval_date,
     'WEATHER': eval_weather,
+    'PR42': pres42,
+    'PR01': pres_ini,
 }
 
 class HVAP_request:

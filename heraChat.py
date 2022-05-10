@@ -24,6 +24,11 @@ def get_request_command(message):
     if 'COMO ESTAS' in msg_case or "QUE TAL" in msg_case:
         return HWRU_COMMAND, None
 
+    if 'RESPUESTA A LA VIDA' in msg_case:
+        return 'PR42', None
+    if 'HAZ LA PRESENTACION' in msg_case:
+        return 'PR01', None
+
     # Tiempo
     if 'TIEMPO EN' in msg_case:
         city = get_city_as_plain_text(msg_case, 'TIEMPO EN')
